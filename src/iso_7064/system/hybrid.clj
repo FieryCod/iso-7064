@@ -1,9 +1,10 @@
 (ns iso-7064.system.hybrid
-  (:require [iso-7064.system :refer [Iso7064System -calc-check-character]]))
+  (:require [iso-7064.system :refer [Iso7064System -calc-check-character]])
+  (:import [clojure.lang StringSeq]))
 
 (defn- hybrid-checksum [alphabet m s]
   (->> (seq s)
-       (map (fn [ch] (.indexOf (seq alphabet) ch)))
+       (map (fn [ch] (.indexOf ^StringSeq (seq alphabet) ch)))
        (reduce (fn [p a]
                  (let [Sj|m (mod (+ p a) m)
                        Sj||m (if (= Sj|m 0) m Sj|m)]

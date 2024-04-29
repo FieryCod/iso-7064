@@ -1,8 +1,9 @@
 (ns iso-7064.system.pure
-  (:require [iso-7064.system :refer [Iso7064System]]))
+  (:require [iso-7064.system :refer [Iso7064System]])
+  (:import [clojure.lang StringSeq]))
 
 (defn- get-char-value [alphabet ch]
-  (let [i (.indexOf (seq alphabet) ch)]
+  (let [i (.indexOf ^StringSeq (seq alphabet) ch)]
     (if (< i 0)
       (ex-info (str "Character '" ch "' not allowed in alphabet " alphabet) {})
       i)))
